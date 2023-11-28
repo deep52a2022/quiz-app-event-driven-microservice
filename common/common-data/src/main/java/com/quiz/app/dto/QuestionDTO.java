@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 @Builder
 public class QuestionDTO {
+    private int question_id;
     private String questionTitle;
     private List<AnswerOption> options;
     private String difficultyLevel;

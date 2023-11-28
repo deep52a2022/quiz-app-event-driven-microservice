@@ -30,7 +30,6 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "correct_option_id")
-    @JsonIgnore
     private AnswerOption correctOption;
 
     @Enumerated(EnumType.STRING)

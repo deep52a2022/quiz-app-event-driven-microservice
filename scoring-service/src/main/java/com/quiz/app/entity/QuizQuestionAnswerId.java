@@ -1,18 +1,15 @@
-package com.quiz.app.model;
-
+package com.quiz.app.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Builder
+import java.io.Serializable;
+
 @NoArgsConstructor
 @AllArgsConstructor
-public class QnAPair {
-
+@Data
+public class QuizQuestionAnswerId implements Serializable {
+    private int quizId;
     private int questionId;
-    private int selectedOptionId;
-
 }

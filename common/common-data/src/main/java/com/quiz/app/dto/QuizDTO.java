@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class QuizDTO {
+    private int quizId;
     private List<QuestionDTO> questions;
     private String category;
 }

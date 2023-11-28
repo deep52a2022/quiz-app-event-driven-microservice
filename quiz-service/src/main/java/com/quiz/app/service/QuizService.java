@@ -1,5 +1,6 @@
 package com.quiz.app.service;
 
+import com.quiz.app.dto.QuizDTO;
 import com.quiz.app.entity.Question;
 import com.quiz.app.entity.Quiz;
 import com.quiz.app.event.QuizCreatedEvent;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @Slf4j
@@ -27,7 +29,7 @@ public class QuizService {
     @Autowired
     QuizCreatedEventPublisher quizCreatedEventPublisher;
 
-    public Quiz createQuiz(String category, int numQ, String title) {
+    public QuizDTO createQuiz(String category, int numQ, String title){
         List<Question> questions = questionService.findRandomQuestionsByCategory(category, numQ);
         Quiz quiz = Quiz.builder()
                 .title(title)
@@ -37,13 +39,20 @@ public class QuizService {
         Quiz savedQuiz = quizRepository.save(quiz);
         savedQuiz = getQuizById(savedQuiz.getQuizId());
         publishQuizCreatedEvent(savedQuiz);
-        return savedQuiz;
+        return mapper.quizToQuizDTO(savedQuiz);
     }
 
     @Async("asyncTaskExecutorForQuizService")
     private void publishQuizCreatedEvent(Quiz savedQuiz) {
-        QuizCreatedEvent quizCreatedEvent = mapper.quizToQuizCreatedEvent(savedQuiz);
-        quizCreatedEventPublisher.publish(quizCreatedEvent);
+        QuizCreatedEvent quizCreatedEvent;
+        try {
+            quizCreatedEvent = mapper.quizToQuizCreatedEvent(savedQuiz).get();
+            quizCreatedEventPublisher.publish(quizCreatedEvent);
+        } catch (ExecutionException | InterruptedException e){
+            log.info(e.getMessage());
+        }
+
+
     }
 
     public Quiz getQuizById(int quizId){

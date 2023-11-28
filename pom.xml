@@ -17,6 +17,7 @@
 		<module>common</module>
 		<module>quiz-service</module>
 		<module>question-fetch</module>
+		<module>scoring-service</module>
 	</modules>
 	<packaging>pom</packaging>
 	<properties>

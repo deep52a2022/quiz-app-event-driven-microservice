@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +21,7 @@ public class QuizCreatedEventPublisherImpl implements QuizCreatedEventPublisher 
     private KafkaTemplate<String, QuizCreatedEvent> template;
 
     @Override
+    @Async("asyncTaskExecutorForQuizService")
     public void publish(QuizCreatedEvent QuizCreatedEvent) {
         try {
             CompletableFuture<SendResult<String, QuizCreatedEvent>> future =
@@ -28,10 +30,10 @@ public class QuizCreatedEventPublisherImpl implements QuizCreatedEventPublisher 
             future.whenComplete((result,ex)->{
                 if (ex == null) {
                     log.info("Published QuizCreatedEvent for quiz id: {}",
-                            QuizCreatedEvent.getQuiz().getQuizId());
+                            QuizCreatedEvent.getQuizResponse().getQuizId());
                 } else {
                     log.info("Failed to Publish QuizCreatedEvent for quiz id: {}",
-                            QuizCreatedEvent.getQuiz().getQuizId());
+                            QuizCreatedEvent.getQuizResponse().getQuizId());
                 }
             });
         } catch (Exception e) {
