@@ -7,9 +7,7 @@ import com.quiz.app.event.listener.QuizSubmittedEventListener;
 import com.quiz.app.kafka.CommonKafkaData;
 import com.quiz.app.mapper.Mapper;
 import com.quiz.app.model.QnAPair;
-import com.quiz.app.repository.QuestionRepository;
 import com.quiz.app.repository.QuizQuestionAnswerRepository;
-import com.quiz.app.repository.QuizRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +21,6 @@ import java.util.List;
 @Service
 @Slf4j
 public class ScoreService implements QuizSubmittedEventListener {
-
-    @Autowired
-    QuizRepository quizRepository;
-
-    @Autowired
-    QuestionRepository questionRepository;
 
     @Autowired
     private QuizQuestionAnswerRepository quizQuestionAnswerRepository;
@@ -51,5 +43,10 @@ public class ScoreService implements QuizSubmittedEventListener {
         log.info("Updated Corrected answer mappings for quiz id: {}", quizId);
         return new ResponseEntity(HttpStatus.OK);
 
+    }
+
+    public List<QuizQuestionAnswer> findQuesAnsByQuizId(int quizId){
+        List<QuizQuestionAnswer> quizQuestionAnswers = quizQuestionAnswerRepository.findByQuizId(quizId);
+        return quizQuestionAnswers;
     }
 }

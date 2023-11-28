@@ -23,8 +23,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
             "WHERE qq.quiz_id = :quizId", nativeQuery = true)
     List<Question> findQuestionsByQuizId(@Param("quizId") Integer quizId);
 
-    @Query(value = "SELECT" +
-            " CASE" +
+    @Query(value = "SELECT" + " CASE" +
             " WHEN q.correct_option_id = :option_id THEN TRUE" +
             "        ELSE FALSE" +
             "    END" +
