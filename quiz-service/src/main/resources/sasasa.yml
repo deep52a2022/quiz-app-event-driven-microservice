@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+
+spring:
+  config:
+    import: optional:configserver:
+
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/quizdb?serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
