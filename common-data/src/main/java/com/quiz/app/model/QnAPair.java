@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QnAPair {
+public class QnAPair{
 
     private int questionId;
     private int selectedOptionId;

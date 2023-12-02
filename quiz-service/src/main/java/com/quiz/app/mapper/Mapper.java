@@ -39,10 +39,10 @@ public class Mapper {
 
     @Async("asyncTaskExecutorForQuizService")
     public CompletableFuture<QuizCreatedEvent> quizToQuizCreatedEvent(Quiz quiz) {
-        QuizCreatedEvent quizCreatedEvent = QuizCreatedEvent.builder()
-                .quizResponse(quizToCorrectQuizResponse(quiz))
-                .createdAt(ZonedDateTime.now())
-                .build();
+        QuizCreatedEvent quizCreatedEvent = new QuizCreatedEvent(
+                        quizToCorrectQuizResponse(quiz),
+                        ZonedDateTime.now()
+                );
         return CompletableFuture.completedFuture(quizCreatedEvent);
     }
     public QuizResponse quizToCorrectQuizResponse(Quiz quiz){

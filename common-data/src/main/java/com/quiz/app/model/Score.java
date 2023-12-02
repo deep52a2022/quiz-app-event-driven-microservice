@@ -1,12 +1,16 @@
 package com.quiz.app.model;
 
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
-@Builder
-public class Score {
-    private int total;
+@Getter
+public class Score{
+
     private int correct;
+    private int total;
+
+    public Score(int correct, int total) {
+        this.correct = correct;
+        this.total = total;
+    }
 }

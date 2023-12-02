@@ -28,6 +28,8 @@
 		<feign-okhttp.version>12.4</feign-okhttp.version>
 		<feign-httpclient.version>12.2</feign-httpclient.version>
 		<jackson-annotations.version>2.15.3</jackson-annotations.version>
+		<kafka-clients.version>3.6.0</kafka-clients.version>
+		<jackson-datatype-jsr310.version>2.16.0</jackson-datatype-jsr310.version>
 	</properties>
 	<dependencies>
 

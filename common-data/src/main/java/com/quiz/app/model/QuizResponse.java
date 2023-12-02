@@ -11,7 +11,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizResponse {
+public class QuizResponse  {
     private Integer quizId;
+    private String quizName;
+    private String category;
     private List<QnAPair> answers;
 }
