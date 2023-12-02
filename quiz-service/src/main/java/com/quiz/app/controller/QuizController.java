@@ -3,7 +3,6 @@ package com.quiz.app.controller;
 
 import com.quiz.app.dto.QuizDTO;
 import com.quiz.app.entity.Quiz;
-import com.quiz.app.event.publisher.QuizSubmittedEventPublisher;
 import com.quiz.app.mapper.Mapper;
 import com.quiz.app.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ public class QuizController {
 
     @Autowired
     private Mapper mapper;
-
-    @Autowired
-    QuizSubmittedEventPublisher quizSubmittedEventPublisher;
 
 
 

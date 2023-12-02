@@ -1,6 +1,7 @@
 package com.quiz.app.config;
 
 import com.quiz.app.event.QuizCreatedEvent;
+import com.quiz.app.event.deserializer.QuizCreatedEventDeserializer;
 import com.quiz.app.kafka.CommonKafkaData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -34,7 +35,7 @@ public class QuizCreatedEventKafkaConsumerConfig {
                 StringDeserializer.class);
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                StringDeserializer.class);
+                QuizCreatedEventDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(QuizCreatedEvent.class));
     }
 

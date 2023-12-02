@@ -1,7 +1,7 @@
 package com.quiz.app.config;
 
-import com.quiz.app.event.GenericSerializer;
 import com.quiz.app.event.QuizSubmittedEvent;
+import com.quiz.app.event.serializer.QuizSubmittedEventSerializer;
 import com.quiz.app.kafka.CommonKafkaData;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -45,9 +45,5 @@ public class KafkaProducerConfig {
         return new KafkaTemplate<>(producerFactory());
     }
 
-    @Bean
-    public GenericSerializer<QuizSubmittedEvent> getSerializer(){
-        return new GenericSerializer<QuizSubmittedEvent>();
-    }
 
 }

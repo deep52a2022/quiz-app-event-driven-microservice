@@ -50,6 +50,8 @@ public class Mapper {
                 .quizId(quiz.getQuizId())
                 .answers(quiz.getQuestions().stream()
                         .map(question -> questionToQnAPairsWithRightAns(question)).collect(Collectors.toList()))
+                .category(quiz.getCategory())
+                .quizName(quiz.getTitle())
                 .build();
     }
 
