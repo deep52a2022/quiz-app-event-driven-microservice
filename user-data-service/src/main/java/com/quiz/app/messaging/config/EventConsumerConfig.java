@@ -1,7 +1,7 @@
-package com.quiz.app.config;
+package com.quiz.app.messaging.config;
 
-import com.quiz.app.event.QuizCreatedEvent;
-import com.quiz.app.event.deserializer.QuizCreatedEventDeserializer;
+import com.quiz.app.event.QuizSubmittedEvent;
+import com.quiz.app.event.deserializer.QuizSubmittedEventDeserializer;
 import com.quiz.app.kafka.CommonKafkaData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -19,10 +19,10 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class QuizCreatedEventKafkaConsumerConfig {
+public class EventConsumerConfig {
 
     @Bean
-    public ConsumerFactory<String, QuizCreatedEvent> consumerFactory1() {
+    public ConsumerFactory<String, QuizSubmittedEvent> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -35,17 +35,17 @@ public class QuizCreatedEventKafkaConsumerConfig {
                 StringDeserializer.class);
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                QuizCreatedEventDeserializer.class);
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(QuizCreatedEvent.class));
+                QuizSubmittedEventDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(QuizSubmittedEvent.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, QuizCreatedEvent>
-    kafkaListenerContainerFactory1() {
+    public ConcurrentKafkaListenerContainerFactory<String, QuizSubmittedEvent>
+    kafkaListenerContainerFactory() {
 
-        ConcurrentKafkaListenerContainerFactory<String, QuizCreatedEvent> factory =
+        ConcurrentKafkaListenerContainerFactory<String, QuizSubmittedEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory1());
+        factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 }

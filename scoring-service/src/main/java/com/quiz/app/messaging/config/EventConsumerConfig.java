@@ -1,6 +1,7 @@
-package com.quiz.app.config;
+package com.quiz.app.messaging.config;
 
-import com.quiz.app.event.QuizSubmittedEvent;
+import com.quiz.app.event.QuizCreatedEvent;
+import com.quiz.app.event.deserializer.QuizCreatedEventDeserializer;
 import com.quiz.app.kafka.CommonKafkaData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -18,10 +19,10 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class QuizSubmittedEventKafkaConsumerConfig {
+public class EventConsumerConfig {
 
     @Bean
-    public ConsumerFactory<String, QuizSubmittedEvent> consumerFactory() {
+    public ConsumerFactory<String, QuizCreatedEvent> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -34,15 +35,15 @@ public class QuizSubmittedEventKafkaConsumerConfig {
                 StringDeserializer.class);
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                StringDeserializer.class);
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(QuizSubmittedEvent.class));
+                QuizCreatedEventDeserializer.class);
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(QuizCreatedEvent.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, QuizSubmittedEvent>
+    public ConcurrentKafkaListenerContainerFactory<String, QuizCreatedEvent>
     kafkaListenerContainerFactory() {
 
-        ConcurrentKafkaListenerContainerFactory<String, QuizSubmittedEvent> factory =
+        ConcurrentKafkaListenerContainerFactory<String, QuizCreatedEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;

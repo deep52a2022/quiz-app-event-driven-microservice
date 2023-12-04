@@ -1,4 +1,4 @@
-package com.quiz.app.service;
+package com.quiz.app.messaging.publisher;
 
 
 import com.quiz.app.event.QuizCreatedEvent;

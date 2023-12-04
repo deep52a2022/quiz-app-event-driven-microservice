@@ -3,9 +3,11 @@ package com.quiz.app.event;
 
 import com.quiz.app.model.QuizResponse;
 import com.quiz.app.model.Score;
+import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
+@NoArgsConstructor
 public class QuizSubmittedEvent extends QuizEvent{
     private int userId;
     private Score score;

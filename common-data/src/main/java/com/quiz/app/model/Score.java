@@ -2,8 +2,10 @@ package com.quiz.app.model;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class Score{
 
     private int correct;

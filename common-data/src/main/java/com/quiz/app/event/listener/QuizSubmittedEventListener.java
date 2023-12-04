@@ -1,6 +1,8 @@
 package com.quiz.app.event.listener;
 
-public interface QuizSubmittedEventListener {
+import com.quiz.app.event.QuizSubmittedEvent;
+
+public interface QuizSubmittedEventListener<R> extends DomainEventListener<QuizSubmittedEvent,R> {
 
 
 

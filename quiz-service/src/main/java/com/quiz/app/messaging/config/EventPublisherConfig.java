@@ -1,4 +1,4 @@
-package com.quiz.app.config;
+package com.quiz.app.messaging.config;
 
 import com.quiz.app.event.QuizCreatedEvent;
 import com.quiz.app.event.QuizSubmittedEvent;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig {
+public class EventPublisherConfig {
 
     @Bean
     public NewTopic createTopic(){

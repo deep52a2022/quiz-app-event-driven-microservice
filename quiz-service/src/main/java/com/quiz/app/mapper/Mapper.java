@@ -51,7 +51,7 @@ public class Mapper {
                 .answers(quiz.getQuestions().stream()
                         .map(question -> questionToQnAPairsWithRightAns(question)).collect(Collectors.toList()))
                 .category(quiz.getCategory())
-                .quizName(quiz.getTitle())
+                .quizTitle(quiz.getTitle())
                 .build();
     }
 

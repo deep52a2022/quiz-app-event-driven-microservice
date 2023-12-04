@@ -1,4 +1,4 @@
-package com.quiz.app.config;
+package com.quiz.app.messaging.publisher;
 
 import com.quiz.app.event.QuizSubmittedEvent;
 import com.quiz.app.event.publisher.QuizSubmittedEventPublisher;
