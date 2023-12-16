@@ -35,6 +35,10 @@ public class ScoreService {
     public void processQuizResponse(QuizResponse quizResponse, String userId) {
         List<QnAPair> submittedQNAPairs = quizResponse.getAnswers();
         Set<QnAPair> correctQNAPairs = getCorrectQnApairs(quizResponse);
+        if(correctQNAPairs == null || correctQNAPairs.size() == 0){
+            log.info("Quiz doesn't exist for this response");
+            return;
+        }
         Score score = getScore(submittedQNAPairs, correctQNAPairs);
 
         quizResponse.setAnswers(correctQNAPairs.stream().toList());

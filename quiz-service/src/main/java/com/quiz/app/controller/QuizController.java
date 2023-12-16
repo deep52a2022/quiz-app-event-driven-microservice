@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/quiz")
+//@CrossOrigin(origins = "http://localhost:4200/", allowCredentials = "true")
 public class QuizController {
 
     @Autowired
@@ -21,7 +22,11 @@ public class QuizController {
     @Autowired
     private Mapper mapper;
 
-
+    @PostMapping("/test-quiz")
+    public ResponseEntity<QuizDTO> takeTestQuiz(){
+        QuizDTO quizDTO = quizService.getQuizDTOById(Integer.valueOf(24));
+        return new ResponseEntity(quizDTO, HttpStatus.CREATED);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createQuiz(@RequestParam String category,
@@ -40,7 +45,7 @@ public class QuizController {
         return new ResponseEntity(quizDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/quiz/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<QuizDTO> getQuizById(@PathVariable int id){
         Quiz quiz = quizService.getQuizById(id);
         QuizDTO quizDTO = mapper.quizToQuizDTO(quiz);

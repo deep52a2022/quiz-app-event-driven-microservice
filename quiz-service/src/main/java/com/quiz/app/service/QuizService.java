@@ -42,6 +42,11 @@ public class QuizService {
         return mapper.quizToQuizDTO(savedQuiz);
     }
 
+    public QuizDTO getQuizDTOById(Integer id){
+        Quiz quiz = getQuizById(id);
+        return mapper.quizToQuizDTO(quiz);
+    }
+
     @Async("asyncTaskExecutorForQuizService")
     private void publishQuizCreatedEvent(Quiz savedQuiz) {
         QuizCreatedEvent quizCreatedEvent;
