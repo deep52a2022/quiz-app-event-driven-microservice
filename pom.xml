@@ -16,7 +16,7 @@
 	<modules>
 		<module>common-data</module>
 		<module>quiz-service</module>
-<!--		<module>question-fetch</module>-->
+
 		<module>scoring-service</module>
         <module>user-data-service</module>
 		<module>auth-service</module>
